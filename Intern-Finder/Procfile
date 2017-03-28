@@ -1,0 +1,13 @@
+import BeautifulSoup
+import urllib2
+import re
+
+url = 'http://techcrunch.com/2012/05/15/facebook-lightbox/'
+
+fd = urllib2.urlopen(url)
+
+soup = BeautifulSoup.BeautifulSoup(fd)
+
+fb_comment = soup("div", {"class":"postText"}).find(text=True)
+
+print fb_comment

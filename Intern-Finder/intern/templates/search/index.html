@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+.footer{
+	min-height:120px;
+	text-align:center;
+	background:#383838;
+	color:white;
+	padding:20px;
+	font-size:14px;
+	font-family:calibri;
+}
+#info:hover{
+	cursor:pointer;
+}
+</style>
+    <meta charset="UTF-8">
+    <title>INTERN FINDER</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body> 	
+<div style="width:100%; margin:0px;position:fixed;top:0px;background:#DAF7A6;z-index:2;">
+    <h1 style="background:none;color:#383838;text-align:center;">Intern-Finder</h1>
+</div>
+<div class="container">
+    {% if error == True %}
+        <div class="alert alert-danger alert-dismissible fade-in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Oh snap! Please Retry!</strong> {{ error_value }}
+        </div>
+    {% endif %}
+</div>
+<div class="container" style="padding-top:100px;">
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}<br></br>
+    <div>
+        <button class="btn btn-primary" type="submit">Search</button><div id="info" style="background:#484848;color:white;float:right;display:block;position:relative;padding:10px;padding-right:20px;" onClick="remove()">
+<i>&nbsp&nbsp&nbsp&nbsp Colleges: IITD, IITB, IITM, IISC, IITH, IITR &nbsp&nbsp&nbsp Area: Field of Interest&nbsp&nbsp&nbsp Department: EE </i></div>
+<script>
+function remove(){
+	document.getElementById("info").style.display="none";
+}
+</script>
+    </div>
+</form>
+<br>
+    {% if c == True %}
+        <div class="alert alert-success alert-dismissable fade-in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>There you go!</strong>
+        </div>
+    {% endif %}
+</div>
+<div style="min-height:300px;">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+        <th>Homepage</th>
+        <th>Contact</th>
+        <th>Research areas/ Projects</th>
+    </tr>
+  </thead>
+    <tbody>
+    {% for proff in proff_data %}
+    <tr >
+        <th scope="row">{{ forloop.counter }}</th>
+        <td><strong>{{ proff.name}}</strong></td>
+        <td>{{ proff.email}}</td>
+        <td><a href= {{ proff.link }} >{{ proff.link}}</a></td>
+        <td>{{ proff.contact_detail}}</td>
+        <td>{{ proff.field}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+<br>
+<div class="footer">
+<strong>Thank You.</strong><br>
+For more details, Contact<br>
+<a href="https://www.facebook.com/myk.mayank.agrawal?fref=ts">Mayank<a>
+&nbsp&nbsp&nbsp
+<a href="https://www.facebook.com/ajeyo.dey?fref=ts">Ajeyo</a>
+<br>
+</div>
+</body>
+</html>
